@@ -1,9 +1,11 @@
 import { getOrCreateAssociatedTokenAccount, createTransferInstruction, getAssociatedTokenAddress, createAssociatedTokenAccountInstruction } from "@solana/spl-token";
 import { Connection, Keypair, ParsedAccountData, PublicKey, sendAndConfirmTransaction, Transaction } from "@solana/web3.js";
 import secret from './wallet.json';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-const QUICKNODE_RPC = process.env.QUICKNODE_RPC || 'https://api.devnet.solana.com';
-const connection = new Connection(QUICKNODE_RPC);
+const QUICKNODE_RPC = process.env.QUICKNODE_RPC;
+const connection = new Connection(QUICKNODE_RPC!, 'confirmed');
 
 const DESTINATION_WALLET = 'EuEVeJStQoJmXgXyDabgdeAhK75d3wWexJ9C3uCezGAP'; 
 const MINT_ADDRESS = '5oaWemm2ZGvtBswRbs9rcQjKDqvmUfp5XSxEz6oa32rb'; 

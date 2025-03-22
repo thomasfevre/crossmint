@@ -2,11 +2,12 @@ import { createNft, mplTokenMetadata } from '@metaplex-foundation/mpl-token-meta
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { createGenericFile, createSignerFromKeypair, generateSigner, keypairIdentity, percentAmount, sol } from '@metaplex-foundation/umi';
 import { mockStorage } from '@metaplex-foundation/umi-storage-mock';
-import * as fs from 'fs';
 import secret from './wallet.json';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-const QUICKNODE_RPC = process.env.QUICKNODE_RPC || 'https://api.devnet.solana.com';
-const umi = createUmi(QUICKNODE_RPC); 
+const QUICKNODE_RPC = process.env.QUICKNODE_RPC;
+const umi = createUmi(QUICKNODE_RPC!, { commitment: 'confirmed' }); 
 
 const creatorWallet = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secret));
 const creator = createSignerFromKeypair(umi, creatorWallet);
